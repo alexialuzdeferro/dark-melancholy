@@ -572,7 +572,7 @@
             100% { opacity: 1; }
         }
 
-        /* Footer Personalizado */
+        /* Footer Simplificado */
         footer {
             text-align: center;
             padding: 20px 15px;
@@ -591,19 +591,13 @@
             margin: 0 auto;
         }
 
-        .footer-signature {
-            color: var(--blood-red);
+        .footer-text {
+            color: var(--text-color);
             font-family: 'Garamond', 'Times New Roman', serif;
-            font-size: 1.1em;
-            margin-top: 5px;
+            font-size: 1em;
             letter-spacing: 1px;
             text-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
             transition: color 0.5s ease;
-        }
-
-        .footer-signature span {
-            color: var(--amethyst);
-            font-style: italic;
         }
 
         /* Mobile Menu Bottom Bar */
@@ -885,9 +879,7 @@
         
         <footer>
             <div class="footer-content">
-                <p>Dark Melancholy Player • Gothic Darkwave Experience</p>
-                <p>30 tracks de darkwave melancólico para imersão gótica</p>
-                <p class="footer-signature">Todos os direitos reservados by <span>Alexia Melusine</span></p>
+                <p class="footer-text">Dark Melancholy Player • Gothic Darkwave</p>
             </div>
         </footer>
     </div>
@@ -915,7 +907,7 @@
     <audio id="audio-player" preload="metadata"></audio>
     
     <script>
-        // Dados das músicas (30 tracks góticas/darkwave)
+        // Dados das músicas (30 tracks góticas/darkwave) - ORDENADAS DE 1 A 30
         const songs = [
             { id: 1, title: "Eternal Darkness", artist: "Gothic Shadows", duration: "4:32", color: "#8b0000" },
             { id: 2, title: "Melancholy Waves", artist: "Darkwave Collective", duration: "5:18", color: "#4a004a" },
@@ -966,7 +958,7 @@
         const visualizer = document.getElementById('visualizer');
         const gothicElements = document.getElementById('gothic-elements');
         const backgroundEffect = document.querySelector('.background-effect');
-        const footerSignature = document.querySelector('.footer-signature');
+        const footerText = document.querySelector('.footer-text');
         
         // Elementos do mobile navigation
         const mobilePlayerBtn = document.getElementById('mobile-player-btn');
@@ -1035,14 +1027,20 @@
             }
         };
 
-        // Inicializar playlist
+        // Inicializar playlist - AGORA JÁ ESTÁ EM ORDEM DE 1 A 30
         function initPlaylist() {
             playlistEl.innerHTML = '';
             
-            songs.forEach((song, index) => {
+            // Garantir que as músicas estejam em ordem crescente (1-30)
+            const sortedSongs = [...songs].sort((a, b) => a.id - b.id);
+            
+            sortedSongs.forEach((song, index) => {
                 const songItem = document.createElement('div');
                 songItem.className = 'song-item';
-                if (index === currentSongIndex) {
+                
+                // Encontrar o índice correto baseado no ID da música
+                const actualIndex = songs.findIndex(s => s.id === song.id);
+                if (actualIndex === currentSongIndex) {
                     songItem.classList.add('playing');
                 }
                 
@@ -1055,7 +1053,9 @@
                 `;
                 
                 songItem.addEventListener('click', () => {
-                    playSong(index);
+                    // Encontrar o índice correto baseado no ID da música
+                    const songIndex = songs.findIndex(s => s.id === song.id);
+                    playSong(songIndex);
                     createPulseEffect(songItem);
                     // A cor do fundo muda conforme o tema atual
                     changeBackgroundColor(getThemeColor(song.color));
@@ -1092,9 +1092,6 @@
             // Atualizar cor do efeito de fundo
             updateBackgroundEffect();
             
-            // Atualizar cor da assinatura no rodapé
-            updateFooterSignature();
-            
             // Atualizar visualizador se estiver tocando
             if (isPlaying) {
                 startVisualizer();
@@ -1110,13 +1107,6 @@
             backgroundEffect.style.background = 
                 `radial-gradient(circle at 20% 30%, ${colors['--blood-red']}20 0%, transparent 50%),
                  radial-gradient(circle at 80% 70%, ${colors['--amethyst']}20 0%, transparent 50%)`;
-        }
-
-        // Atualizar cor da assinatura no rodapé
-        function updateFooterSignature() {
-            const colors = themes[currentTheme];
-            footerSignature.style.color = colors['--blood-red'];
-            footerSignature.querySelector('span').style.color = colors['--amethyst'];
         }
 
         // Converter cor para o tema atual
@@ -1158,9 +1148,12 @@
             currentSongTitle.textContent = song.title;
             currentSongArtist.textContent = song.artist;
             
-            // Atualizar playlist
+            // Atualizar playlist - marcar a música correta como playing
             document.querySelectorAll('.song-item').forEach((item, i) => {
-                if (i === currentSongIndex) {
+                const itemNumber = parseInt(item.querySelector('.song-number').textContent);
+                // Encontrar o índice da música baseado no número
+                const songIndex = songs.findIndex(s => s.id === itemNumber);
+                if (songIndex === currentSongIndex) {
                     item.classList.add('playing');
                 } else {
                     item.classList.remove('playing');
