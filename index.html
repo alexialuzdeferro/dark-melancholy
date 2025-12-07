@@ -58,36 +58,53 @@
             position: relative;
         }
 
-        /* Botões Flutuantes de Modo */
-        .theme-floating-buttons {
+        /* Botões de Tema Fixos no Topo - Versão Harmoniosa */
+        .theme-top-buttons {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             z-index: 1000;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 12px;
-            border-radius: 15px;
-            border: 1px solid rgba(139, 0, 0, 0.3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            gap: 8px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 8px 12px;
+            border-radius: 25px;
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .theme-top-buttons {
+                top: 20px;
+                right: 20px;
+                padding: 10px 15px;
+                gap: 10px;
+            }
         }
 
         .theme-btn {
-            width: 45px;
-            height: 45px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 2px solid transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .theme-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
         }
 
         .theme-btn:hover, .theme-btn:active {
@@ -95,8 +112,8 @@
         }
 
         .theme-btn.active {
-            border-color: white;
-            box-shadow: 0 0 10px white;
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 12px currentColor;
         }
 
         .theme-btn::after {
@@ -111,58 +128,69 @@
         }
 
         #dark-mode-btn {
-            background: linear-gradient(45deg, #0a0a0a, #1a0a1a);
+            background: linear-gradient(135deg, #0a0a0a, #1a0a1a);
             color: #8b0000;
+            border-color: #4a004a;
         }
 
         #dark-mode-btn::after {
-            background: linear-gradient(45deg, #8b0000, #4a004a);
+            background: radial-gradient(circle at 30% 30%, #8b0000, #4a004a);
         }
 
         #yellow-mode-btn {
-            background: linear-gradient(45deg, #1a1a00, #2a2a00);
+            background: linear-gradient(135deg, #1a1a00, #2a2a00);
             color: #ffcc00;
+            border-color: #996600;
         }
 
         #yellow-mode-btn::after {
-            background: linear-gradient(45deg, #ffcc00, #ff9900);
+            background: radial-gradient(circle at 30% 30%, #ffcc00, #ff9900);
         }
 
         #light-mode-btn {
-            background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
+            background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
             color: #333;
+            border-color: #999;
         }
 
         #light-mode-btn::after {
-            background: linear-gradient(45deg, #666, #999);
+            background: radial-gradient(circle at 30% 30%, #666, #999);
         }
 
-        .theme-label {
+        .theme-tooltip {
             position: absolute;
-            top: 50px;
+            top: 45px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             white-space: nowrap;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        .theme-btn:hover .theme-label {
+        .theme-btn:hover .theme-tooltip {
             opacity: 1;
         }
 
         /* Header Mobile Friendly */
         header {
             text-align: center;
-            padding: 20px 0 15px;
+            padding: 60px 0 15px;
             position: relative;
             margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 70px 0 20px;
+            }
         }
 
         h1 {
@@ -544,6 +572,40 @@
             100% { opacity: 1; }
         }
 
+        /* Footer Personalizado */
+        footer {
+            text-align: center;
+            padding: 20px 15px;
+            border-top: 1px solid rgba(139, 0, 0, 0.3);
+            margin-top: 30px;
+            color: #666;
+            font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+            transition: border-color 0.5s ease, color 0.5s ease;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 10px 10px 0 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-signature {
+            color: var(--blood-red);
+            font-family: 'Garamond', 'Times New Roman', serif;
+            font-size: 1.1em;
+            margin-top: 5px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
+            transition: color 0.5s ease;
+        }
+
+        .footer-signature span {
+            color: var(--amethyst);
+            font-style: italic;
+        }
+
         /* Mobile Menu Bottom Bar */
         .mobile-bottom-bar {
             position: fixed;
@@ -660,17 +722,6 @@
             100% { width: 150px; height: 150px; opacity: 0; transform: translate(-50%, -50%); }
         }
 
-        /* Footer Mobile */
-        footer {
-            text-align: center;
-            padding: 15px;
-            border-top: 1px solid rgba(139, 0, 0, 0.3);
-            margin-top: 20px;
-            color: #666;
-            font-size: clamp(0.75rem, 2.8vw, 0.9rem);
-            transition: border-color 0.5s ease, color 0.5s ease;
-        }
-
         /* Landscape Mode Adjustments */
         @media (orientation: landscape) and (max-height: 600px) {
             .main-content {
@@ -691,9 +742,14 @@
                 height: 60px;
             }
             
-            .theme-floating-buttons {
+            .theme-top-buttons {
                 top: 10px;
                 right: 10px;
+                padding: 6px 10px;
+            }
+            
+            header {
+                padding: 50px 0 10px;
             }
         }
 
@@ -721,9 +777,13 @@
                 display: none;
             }
             
-            .theme-floating-buttons {
-                top: 30px;
-                right: 30px;
+            .theme-top-buttons {
+                top: 25px;
+                right: 25px;
+            }
+            
+            header {
+                padding: 80px 0 25px;
             }
         }
 
@@ -742,6 +802,10 @@
             .control-btn:active, .all-songs-btn:active, .song-item:active, .theme-btn:active {
                 transform: scale(0.95);
             }
+            
+            .theme-btn .theme-tooltip {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -750,19 +814,19 @@
     
     <div class="gothic-elements" id="gothic-elements"></div>
     
-    <!-- Botões Flutuantes de Modo de Cor -->
-    <div class="theme-floating-buttons">
-        <button class="theme-btn active" id="dark-mode-btn" title="Modo Escuro Gótico">
+    <!-- Botões de Tema Fixos no Topo - Versão Harmoniosa -->
+    <div class="theme-top-buttons">
+        <button class="theme-btn active" id="dark-mode-btn">
             <i class="fas fa-moon"></i>
-            <span class="theme-label">Gótico</span>
+            <span class="theme-tooltip">Modo Gótico</span>
         </button>
-        <button class="theme-btn" id="yellow-mode-btn" title="Modo Amarelo/Vermelho/Roxo">
+        <button class="theme-btn" id="yellow-mode-btn">
             <i class="fas fa-fire"></i>
-            <span class="theme-label">Amarelo</span>
+            <span class="theme-tooltip">Modo Amarelo</span>
         </button>
-        <button class="theme-btn" id="light-mode-btn" title="Modo Claro">
+        <button class="theme-btn" id="light-mode-btn">
             <i class="fas fa-sun"></i>
-            <span class="theme-label">Claro</span>
+            <span class="theme-tooltip">Modo Claro</span>
         </button>
     </div>
     
@@ -820,8 +884,11 @@
         </div>
         
         <footer>
-            <p>Dark Melancholy Player • Gothic Darkwave Experience</p>
-            <p>30 tracks de darkwave melancólico para imersão gótica</p>
+            <div class="footer-content">
+                <p>Dark Melancholy Player • Gothic Darkwave Experience</p>
+                <p>30 tracks de darkwave melancólico para imersão gótica</p>
+                <p class="footer-signature">Todos os direitos reservados by <span>Alexia Melusine</span></p>
+            </div>
         </footer>
     </div>
     
@@ -899,6 +966,7 @@
         const visualizer = document.getElementById('visualizer');
         const gothicElements = document.getElementById('gothic-elements');
         const backgroundEffect = document.querySelector('.background-effect');
+        const footerSignature = document.querySelector('.footer-signature');
         
         // Elementos do mobile navigation
         const mobilePlayerBtn = document.getElementById('mobile-player-btn');
@@ -912,6 +980,7 @@
         const darkModeBtn = document.getElementById('dark-mode-btn');
         const yellowModeBtn = document.getElementById('yellow-mode-btn');
         const lightModeBtn = document.getElementById('light-mode-btn');
+        const themeButtons = document.querySelector('.theme-top-buttons');
 
         // Estado do player
         let currentSongIndex = 0;
@@ -1023,6 +1092,9 @@
             // Atualizar cor do efeito de fundo
             updateBackgroundEffect();
             
+            // Atualizar cor da assinatura no rodapé
+            updateFooterSignature();
+            
             // Atualizar visualizador se estiver tocando
             if (isPlaying) {
                 startVisualizer();
@@ -1038,6 +1110,13 @@
             backgroundEffect.style.background = 
                 `radial-gradient(circle at 20% 30%, ${colors['--blood-red']}20 0%, transparent 50%),
                  radial-gradient(circle at 80% 70%, ${colors['--amethyst']}20 0%, transparent 50%)`;
+        }
+
+        // Atualizar cor da assinatura no rodapé
+        function updateFooterSignature() {
+            const colors = themes[currentTheme];
+            footerSignature.style.color = colors['--blood-red'];
+            footerSignature.querySelector('span').style.color = colors['--amethyst'];
         }
 
         // Converter cor para o tema atual
@@ -1088,7 +1167,7 @@
                 }
             });
             
-            // Simular troca de música (em uma implementação real, carregaria o arquivo de áudio)
+            // Simular troca de música
             audioPlayer.src = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${(index % 10) + 1}.mp3`;
             
             // Iniciar reprodução
@@ -1104,8 +1183,6 @@
             isPlaying = true;
             audioPlayer.play().catch(e => {
                 console.log("Autoplay prevented, waiting for user interaction");
-                // Em alguns dispositivos móveis, o autoplay é bloqueado
-                // Vamos apenas atualizar a interface
                 playIcon.className = 'fas fa-play';
                 isPlaying = false;
             });
@@ -1301,12 +1378,10 @@
             createPulseEffect(allSongsBtn);
             
             if (isAllSongsActive) {
-                // Mostrar todas as músicas
                 document.querySelectorAll('.song-item').forEach(item => {
                     item.style.display = 'flex';
                 });
             } else {
-                // Mostrar apenas músicas favoritas (simulação)
                 document.querySelectorAll('.song-item').forEach((item, index) => {
                     item.style.display = index % 3 === 0 ? 'flex' : 'none';
                 });
@@ -1327,7 +1402,6 @@
         });
 
         mobileEffectsBtn.addEventListener('click', () => {
-            // Efeito especial: criar múltiplos pulsos
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     createExpansiveEffect();
@@ -1338,8 +1412,6 @@
         });
 
         mobileSettingsBtn.addEventListener('click', () => {
-            // Mostrar/ocultar botões de tema
-            const themeButtons = document.querySelector('.theme-floating-buttons');
             themeButtons.style.display = themeButtons.style.display === 'none' ? 'flex' : 'none';
             document.querySelectorAll('.mobile-btn').forEach(btn => btn.classList.remove('active'));
             mobileSettingsBtn.classList.add('active');
